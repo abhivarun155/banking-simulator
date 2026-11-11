@@ -1,48 +1,39 @@
 # Banking / ATM Simulator (Java)
 
-A console banking system written in Java. It shows:
+A menu-driven console banking system. The user can open and close accounts, deposit, withdraw and transfer money, view accounts and history, and run a multithreading demo.
 
-- **Inheritance and overriding:** `Account` -> `SavingsAccount`, `CurrentAccount`
-- **Interfaces:** `Transactable`, `Auditable`
-- **Collections:** `ConcurrentHashMap`, `ArrayList`, `ConcurrentLinkedQueue`
-- **Multithreading:** `ExecutorService` thread pool and `ReentrantLock`
-- **Exception handling:** custom checked exceptions
-- **Java NIO:** `Path`, `Files.write`, `Files.readAllLines`
+## Concepts used
+- Inheritance and overriding: Account -> SavingsAccount, CurrentAccount
+- Interfaces: Transactable, Auditable
+- Collections: ConcurrentHashMap, ArrayList, ConcurrentLinkedQueue
+- Multithreading: ExecutorService thread pool and ReentrantLock
+- Exception handling: custom checked exceptions
+- Java NIO: Path, Files.write, Files.readAllLines (accounts and transaction log)
 
-## Project structure
+## Menu
+1. Open a new account
+2. Close (remove) an account
+3. Deposit money
+4. Withdraw money
+5. Transfer money
+6. View all accounts
+7. View account details and interest
+8. View transaction history
+9. Run multithreading demo
+0. Exit
+
+## How to run (Windows)
+Needs JDK 17 or newer. In the project folder:
 
 ```
-src/com/bank/
-  Main.java
-  model/       Transactable, Auditable, Account, SavingsAccount, CurrentAccount
-  service/     BankService, TransactionLogger
-  worker/      TransactionTask
-  exception/   InsufficientFundsException, InvalidAmountException, AccountNotFoundException
-```
-
-## How to run
-
-Needs JDK 17 or newer.
-
-Windows:
-```
-dir /s /b src\*.java > sources.txt
-javac -d out @sources.txt
+javac -d out src\com\bank\*.java src\com\bank\model\*.java src\com\bank\service\*.java src\com\bank\worker\*.java src\com\bank\exception\*.java
 java -cp out com.bank.Main
 ```
 
-Linux / Mac:
-```
-javac -d out $(find src -name "*.java")
-java -cp out com.bank.Main
-```
-
-The transaction history is saved in `data/transactions.log`.
+Accounts are saved in data/accounts.csv and transactions in data/transactions.log.
 
 ## Screenshots
-
-See the `screenshots/` folder.
+See the screenshots folder.
 
 ## Author
-
-[chinnabathula abhi varun prasad], [160125733155]
+[abhi varun], [160125733155]

@@ -4,7 +4,7 @@ import com.bank.exception.InsufficientFundsException;
 import com.bank.exception.InvalidAmountException;
 
 public class SavingsAccount extends Account {
-    private static final double MIN_BALANCE = 500.0;
+    public static final double MIN_BALANCE = 500.0;
     private static final double INTEREST_RATE = 0.04;
 
     public SavingsAccount(String accountNumber, String holderName, double openingBalance) {

@@ -1,6 +1,7 @@
 package com.bank.service;
 
 import com.bank.exception.AccountNotFoundException;
+import com.bank.exception.DuplicateAccountException;
 import com.bank.exception.InsufficientFundsException;
 import com.bank.exception.InvalidAmountException;
 import com.bank.model.Account;
@@ -14,8 +15,26 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BankService {
     private final Map<String, Account> accounts = new ConcurrentHashMap<>();
 
+    // used when accounts are loaded from the file
     public void addAccount(Account account) {
         accounts.put(account.getAccountNumber(), account);
+    }
+
+    // used when the user opens a new account: refuses duplicate numbers
+    public void openAccount(Account account) throws DuplicateAccountException {
+        Account existing = accounts.putIfAbsent(account.getAccountNumber(), account);
+        if (existing != null) {
+            throw new DuplicateAccountException(
+                    "Account number already exists: " + account.getAccountNumber());
+        }
+    }
+
+    public Account removeAccount(String number) throws AccountNotFoundException {
+        Account removed = accounts.remove(number);
+        if (removed == null) {
+            throw new AccountNotFoundException("No account found: " + number);
+        }
+        return removed;
     }
 
     public Account getAccount(String number) throws AccountNotFoundException {

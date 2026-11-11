@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -31,6 +32,9 @@ public class TransactionLogger {
     }
 
     public List<String> readHistory() throws IOException {
+        if (!Files.exists(logFile)) {
+            return new ArrayList<>();
+        }
         return Files.readAllLines(logFile);
     }
 
